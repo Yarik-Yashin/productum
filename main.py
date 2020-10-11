@@ -4,7 +4,7 @@ import ocrspace
 from adds import *
 import os
 
-API_KEY = '123123123123123'
+API_KEY = '790b71df8188957'
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 UPLOAD_FOLDER = '/files'
@@ -80,4 +80,4 @@ def work():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=4567)
