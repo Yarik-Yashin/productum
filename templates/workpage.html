@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link id="theme-style" rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Productum</title>
+</head>
+<body>
+<main>
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <p>
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="lakt">
+                <label class="form-check-label" for="exampleCheck1">Непереносимость лактозы</label>
+            </p>
+            <p>
+                <input type="checkbox" class="form-check-input" id="exampleCheck2" name="fish">
+                <label class="form-check-label" for="exampleCheck2">Аллергия на морепродукты</label>
+            </p>
+            <p>
+                <input type="checkbox" class="form-check-input" id="exampleCheck3" name="arah">
+                <label class="form-check-label" for="exampleCheck3">Аллергия на арахис</label>
+            </p>
+            <p>
+                <input type="checkbox" class="form-check-input" id="exampleCheck4" name="zlak">
+                <label class="form-check-label" for="exampleCheck4">Аллергия на злаки</label>
+            </p>
+            <p>
+                <label for="file">Выбрать файл с изображением</label>
+                <input type="file" class="form-control-file" id="file" name="file">
+            </p>
+            <p>
+                <button type="submit" class="btn btn-primary">Подтвердить</button>
+            </p>
+        </div>
+    </form>
+    {%for i in bad_results%}
+    <div class="alert alert-danger" role="alert">
+        {{i}}
+    </div>
+    {% endfor %}
+    {%for i in good_results%}
+    <div class="alert alert alert-success" role="alert">
+        {{i}}
+    </div>
+    {% endfor %}
+    {%for i in danger_results%}
+    <div class="alert alert alert alert-warning" role="alert">
+        {{i}}
+    </div>
+    {% endfor %}
+
+
+</main>
+</body>
+</html>
