@@ -5,12 +5,20 @@ from adds import *
 import os
 
 API_KEY = '790b71df8188957'
-app = Flask(__name__)
-bootstrap = Bootstrap(app)
+application = Flask(__name__)
+bootstrap = Bootstrap(application)
 UPLOAD_FOLDER = '/files'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 api = ocrspace.API(api_key=API_KEY, language=ocrspace.Language.Russian)
+application.config['TEMPLATES_AUTO_RELOAD'] = True
+
+
+@application.after_request
+def add_header(response):
+    response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
+    response.headers['Cache-Control'] = 'public, max-age=0'
+    return response
 
 
 def allowed_file(filename):
@@ -18,12 +26,12 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 
-@app.route('/')
+@application.route('/')
 def index():
     return render_template('index.html')
 
 
-@app.route('/work', methods=['GET', 'POST'])
+@application.route('/work', methods=['GET', 'POST'])
 def work():
     if request.method == 'POST':
         file = request.files['file']
@@ -80,4 +88,4 @@ def work():
 
 
 if __name__ == '__main__':
-    app.run()
+    application.run(host='0.0.0.0')
